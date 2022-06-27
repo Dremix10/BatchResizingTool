@@ -35,7 +35,7 @@ kth = rnd.randint(0,interval-1)
 for image_path in os.listdir(directory):
     if image_path.endswith(".JPG"):
         if kth == 0:
-            img = Image.open(image_path)
+            img = Image.open(directory + '/' + image_path)
             
             scale = ideal_width/float(img.width)
             new_height = int(float(img.height) * scale)
