@@ -4,7 +4,7 @@ from PIL import Image
 
 # Uses directory that it is ran in to iterate through all .png files and resize a random sample of pictures
 
-directory = os.getcwd()
+directory = input("Please enter directory of pictures to be resized: ")
 
 #print(directory)
 
