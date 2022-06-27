@@ -2,21 +2,20 @@ import os
 import random as rnd
 from PIL import Image
 
-# Uses directory that it is ran in to iterate through all .png files and resize a random sample of pictures
+# Uses directory entered to iterate through all .JPG files and resize a random sample of pictures using the kth-sampling-method
 
 directory = input("Please enter directory of pictures to be resized: ")
 
-#print(directory)
-
+# TO-DO: add resizing customisation
 ideal_width = 5472 / 2.0
 
-num = 1
+suffix = 1
 folder = directory + '/resized_picture_sample'
 
-while os.path.exists(folder + str(num)):
-    num += 1
+while os.path.exists(folder + str(suffix)):
+    suffix += 1
 
-folder += str(num)
+folder += str(suffix)
 
 interval = input("Please enter a number for the interval at which sample should be picked (using random starting point): ")
 
@@ -27,7 +26,17 @@ interval = int(interval)
 
 os.mkdir(folder)
 
-print("\nFolder created with resized sample: " + folder)
+print("\nFolder created which contains resized sample: " + folder)
+
+keep_names = input("Do you want to preserve the names of the picture files? (Y/N) ")
+
+change_name = False
+
+if keep_names == "N":
+    change_name = True
+elif keep_names != "Y":
+    raise Exception("Answer not included in choices (Y/N)")
+
 
 cnt = 1
 kth = rnd.randint(0,interval-1)
@@ -43,7 +52,10 @@ for image_path in os.listdir(directory):
 
             #print(ideal_width, new_height)
 
-            img.save(folder + '/pic' + str(cnt) + '.JPG')
+            if change_name == True:
+                img.save(folder + '/pic' + str(cnt) + '.JPG')
+            else:
+                img.save(folder + '/' + image_path)
             cnt += 1
 
             kth = interval
