@@ -6,11 +6,14 @@ from PIL import Image
 
 directory = input("Please enter directory of pictures to be resized: ")
 
+last_folder = os.path.basename(os.path.normpath(directory))
+
 # TO-DO: add resizing customisation
 ideal_width = 5472 / 2.0
 
 suffix = 1
-folder = directory + '/resized_picture_sample'
+# TO-DO: cleanup path process with methods(?)
+folder = directory + '/' + last_folder + '_resized'
 
 while os.path.exists(folder + str(suffix)):
     suffix += 1
